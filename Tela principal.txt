@@ -1,0 +1,39 @@
+*&---------------------------------------------------------------------*
+*& REPORT ZVGN_PESQUISA_REDE.
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZVGN_PESQUISA_REDE.
+
+TABLES: sscrfields.
+DATA: g_ucomm TYPE syucomm.
+
+SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE text-200.
+SELECTION-SCREEN PUSHBUTTON /1(35) p_but1 USER-COMMAND but1.
+SELECTION-SCREEN PUSHBUTTON /1(35) p_but2 USER-COMMAND but2.
+SELECTION-SCREEN PUSHBUTTON /1(35) p_but3 USER-COMMAND but3.
+SELECTION-SCREEN END OF BLOCK b2.
+
+INITIALIZATION.
+  p_but1 = 'Alimentar tabela'(001).
+  p_but2 = 'Deletar item da tabela'(002).
+  p_but3 = 'Realizar pesquisa'(003).
+
+  AT SELECTION-SCREEN.
+* Se se carregou num dos botões, guarda o seu código e continua
+  IF  sscrfields-ucomm EQ 'BUT1' OR
+      sscrfields-ucomm EQ 'BUT2' OR
+      sscrfields-ucomm EQ 'BUT3'.
+    g_ucomm = sscrfields-ucomm.
+    sscrfields-ucomm = 'ONLI'. " Finge que carregou em F8. Belo truque ;)
+  ENDIF.
+
+  START-OF-SELECTION.
+  CASE g_ucomm.
+    WHEN 'BUT1'.
+      CALL TRANSACTION 'ZCRIAR'.
+    WHEN 'BUT2'.
+      CALL TRANSACTION 'ZELIMINAR'.
+    WHEN 'BUT3'.
+      CALL TRANSACTION 'ZBUSCAR'.
+  ENDCASE.

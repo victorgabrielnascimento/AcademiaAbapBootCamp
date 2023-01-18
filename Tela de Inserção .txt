@@ -1,0 +1,153 @@
+*&---------------------------------------------------------------------*
+*& REPORT ZVGN_CRIAR_PESQUISA
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZVGN_CRIAR_PESQUISA.
+
+tables: sscrfields.
+data: g_ucomm type syucomm.
+
+selection-screen begin of block b3 with frame title text-300.
+selection-screen pushbutton /1(35) p_but1 user-command but1.
+selection-screen end of block b3.
+
+initialization.
+  p_but1 = 'Retornar tela principal'(001).
+
+at selection-screen.
+* Se se carregou num dos botões, guarda o seu código e continua
+  if  sscrfields-ucomm eq 'BUT1' or
+    g_ucomm = sscrfields-ucomm.
+    sscrfields-ucomm = 'ONLI'. " Finge que carregou em F8. Belo truque ;)
+  endif.
+
+start-of-selection.
+  case g_ucomm.
+    when 'BUT1'.
+      call transaction 'ZRETORNO'.
+  endcase.
+
+
+INCLUDE ZVGN_CRIAR_PESQUISA_TOP.
+INCLUDE ZVGN_CRIAR_PESQUISA_F01.
+
+
+
+START-OF-SELECTION.
+
+
+
+perform f_insertdata.
+PERFORM f_getdata.
+
+*&---------------------------------------------------------------------*
+*& Include          ZVGN_CRIAR_PESQUISA_TOP
+*&---------------------------------------------------------------------*
+tables: ztb_rede_soc_vgn.
+
+data: ok_code type sy-ucomm.
+
+
+data: begin of it_table occurs 0,
+        rg     like ztb_rede_soc_vgn-rg,
+        name   like ztb_rede_soc_vgn-name,
+        sname  like ztb_rede_soc_vgn-sobrenome,
+        datana like ztb_rede_soc_vgn-data_nascimiento,
+        faceb  like ztb_rede_soc_vgn-facebook,
+        insta  like ztb_rede_soc_vgn-instagram,
+        twitt  like ztb_rede_soc_vgn-twitter,
+        others like ztb_rede_soc_vgn-otras_redes,
+        mthan  like ztb_rede_soc_vgn-mais_2h,
+        lthan  like ztb_rede_soc_vgn-menos_2h,
+        sdata  like ztb_rede_soc_vgn-data_pesquisa,
+      end of it_table.
+
+
+selection-screen: begin of block b1 with frame.
+
+parameter:    p_rg       like ztb_rede_soc_vgn-rg                 obligatory.
+parameter:    p_name     like ztb_rede_soc_vgn-name               obligatory.
+parameter:    p_sname    like ztb_rede_soc_vgn-sobrenome          obligatory.
+parameter:    p_datana   like ztb_rede_soc_vgn-data_nascimiento   obligatory.
+parameter:    p_faceb    like ztb_rede_soc_vgn-facebook.
+parameter:    p_insta    like ztb_rede_soc_vgn-instagram.
+parameter:    p_twitt    like ztb_rede_soc_vgn-twitter.
+parameter:    p_others   like ztb_rede_soc_vgn-otras_redes.
+parameter:    p_mthan    like ztb_rede_soc_vgn-mais_2h.
+parameter:    p_lthan    like ztb_rede_soc_vgn-menos_2h.
+parameter:    p_sdata    like ztb_rede_soc_vgn-data_pesquisa.
+
+selection-screen end of block b1.
+
+*&---------------------------------------------------------------------*
+*& Include          ZVGN_CRIAR_PESQUISA_F01
+*&---------------------------------------------------------------------*
+*&---------------------------------------------------------------------*
+*& Form F_GETDATA
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*& -->  p1        text
+*& <--  p2        text
+*&---------------------------------------------------------------------*
+form f_getdata.
+
+
+
+
+  select * from ztb_rede_soc_vgn
+    into table @data(itab).
+
+  if sy-subrc ne 0.
+    message 'Não existem dados de acordo com o filtro informado' type 'I'.
+  else.
+    cl_demo_output=>display( itab ).
+  endif.
+
+
+endform.
+*&---------------------------------------------------------------------*
+*& Form F_INSERTDATA
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*& -->  p1        text
+*& <--  p2        text
+*&---------------------------------------------------------------------*
+form f_insertdata .
+
+
+
+  it_table-rg        =  p_rg.
+  it_table-name      =  p_name.
+  it_table-sname     =  p_sname.
+  it_table-datana    =  p_datana.
+  it_table-faceb     =  p_faceb.
+  it_table-insta     =  p_insta.
+  it_table-twitt     =  p_twitt.
+  it_table-others    =  p_others.
+  it_table-mthan     =  p_mthan.
+  it_table-lthan     =  p_lthan.
+  it_table-sdata     =  p_sdata.
+  append it_table.
+
+  move: it_table-rg      to  ztb_rede_soc_vgn-rg,
+        it_table-name    to  ztb_rede_soc_vgn-name,
+        it_table-sname   to  ztb_rede_soc_vgn-sobrenome,
+        it_table-datana  to  ztb_rede_soc_vgn-data_nascimiento,
+        it_table-faceb   to  ztb_rede_soc_vgn-facebook,
+        it_table-insta   to  ztb_rede_soc_vgn-instagram,
+        it_table-twitt   to  ztb_rede_soc_vgn-twitter,
+        it_table-others  to  ztb_rede_soc_vgn-otras_redes,
+        it_table-mthan   to  ztb_rede_soc_vgn-mais_2h,
+        it_table-lthan   to  ztb_rede_soc_vgn-menos_2h,
+        it_table-sdata   to  ztb_rede_soc_vgn-data_pesquisa.
+
+  insert ztb_rede_soc_vgn.
+
+  IF sy-subrc = 0.
+    commit work.
+  ENDIF.
+
+endform.

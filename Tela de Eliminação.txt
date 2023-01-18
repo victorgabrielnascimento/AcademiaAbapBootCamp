@@ -1,0 +1,50 @@
+*&---------------------------------------------------------------------*
+*& Report ZVGN_PESQUISA_ELIMINAR
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZVGN_PESQUISA_ELIMINAR.
+
+tables: sscrfields, ztb_rede_soc_vgn.
+data: g_ucomm type syucomm.
+
+selection-screen begin of block b3 with frame title text-300.
+selection-screen pushbutton /1(35) p_but1 user-command but1.
+selection-screen end of block b3.
+
+initialization.
+  p_but1 = 'Retornar tela principal'(001).
+
+at selection-screen.
+* Se se carregou num dos botões, guarda o seu código e continua
+  if  sscrfields-ucomm eq 'BUT1' or
+    g_ucomm = sscrfields-ucomm.
+    sscrfields-ucomm = 'ONLI'. " Finge que carregou em F8. Belo truque ;)
+  endif.
+
+start-of-selection.
+  case g_ucomm.
+    when 'BUT1'.
+      call transaction 'ZRETORNO'.
+  endcase.
+
+data: i_tab type table of ztb_rede_soc_vgn.
+
+data: begin of it_table occurs 0,
+        rg      like ztb_rede_soc_vgn-rg,
+      end of it_table.
+
+selection-screen: begin of block b1 with frame.
+
+          parameter:    p_rg       like ztb_rede_soc_vgn-rg obligatory.
+
+selection-screen end of block b1.
+
+select rg from ztb_rede_soc_vgn into table @it_table where rg = @p_rg.
+  if sy-subrc = 0.
+    delete from ztb_rede_soc_vgn where rg = @p_rg.
+  else.
+    message 'Os dados não constam em tabela!' type 'I'.
+  endif.
+  
+  
