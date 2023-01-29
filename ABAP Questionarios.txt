@@ -1,0 +1,127 @@
+ABAP Formulários
+
+Formulário 3
+
+Qual das opções abaixo não servem para iniciar o Debugger?
+
+Ponto de parada
+Ponto de parada externo
+Em uma transação, usar o comando /h X
+Em uma transação, usar o comando /n
+
+********************************************
+
+ABAP é uma linguagem de programação que ...
+
+Processos e formatos de dados. X
+Separa o código do programa do texto do idioma.
+Controla a lógica do negócio. X
+Interage com o usuário. X
+Executa em todos os três níveis da arquitetura de três camadas. X
+
+***************************************************~
+
+No ABAP para criação de pacotes, qual a transação que devemos acessar?
+SE09
+SE24
+SE37
+SE21 X
+
+***********************************************************
+
+No ABAP após ter criado um programa e salvado ele localmente, não é possível mais salva-lo em uma request.
+Verdadeiro
+Falso
+
+******************************************************************************************************************************
+
+Qual é o resultado da seguinte operação aritmética? 
+
+Data: lv_int type I. 
+
+lv_int = 5 * ( 3 / 10). 
+
+1,5 X
+0
+2
+1
+
+********************************************************************************************************************************
+
+No ABAP qual das seguintes afirmações é verdadeira? Selecione tudo que se aplica
+
+Os pacotes usam interface interfaces e visibilidade para tornar seus elementos visíveis para outros pacotes
+Um pacote pode ser aninhado
+A camada de transporte é um campo de entrada obrigatória para o pacote
+Todos os objetos do repositório de clientes devem ser atribuídos a pacotes
+
+******************************************************************************************************************************
+
+No ABAP Podemos criar formulários através de quais ferramentas? Selecione tudo que se aplica.
+
+Sapscript
+Funções
+Adobe Forms
+Smart Forms
+Workflows
+
+*********************************************************************************************************************************
+
+Formulário 4
+
+Cada programa ABAP começa com uma declaração introdutória. Quais as declarações estão corretas? Selecione tudo que se aplica.
+
+A declaração introdutória deve ser a primeira linha no programa. X
+
+A declaração introdutória deve ser a primeira declaração no programa. X
+
+A declaração introdutória pode ser modificada. 
+
+A declaração introdutória nunca deve ser modificada.
+
+*********************************************************************************************************************************
+
+
+Os tipo de dados predefinidos são definidos localmente no programa ABAP.
+
+Verdadeiro
+
+Falso X
+
+
+*********************************************************************************************************************************
+
+No Abap você não pode usar a instrução INSERT para inserir linhas em uma tabela interna standard.
+
+Verdadeiro
+
+Falso X
+
+
+*********************************************************************************************************************************
+
+Os tipos de dados ABAP podem ser usados para uma definição de domínio.
+
+Verdadeiro X
+
+Falso
+
+
+*********************************************************************************************************************************
+
+Cada programa ABAP que realmente contém instruções executáveis. Selecione tudo que se aplica.
+
+É dividido em blocos de processamento
+
+Apenas atribui instruções executáveis em um bloco de processamento para um bloco de processamento
+
+Tem declarações declarativas fora dos blocos de processamento que são considerados locais
+
+Atribui cada declaração executável a um bloco de processamento, independentemente de estar em um bloco de processamento
+
+Pode ser testado a partir do ABAP Workbench pressionado (F8) 
+
+Tem declarações declarativas dentro de blocos de processamento que são considerados locais
+
+*********************************************************************************************************************************
+
