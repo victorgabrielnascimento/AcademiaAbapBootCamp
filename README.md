@@ -5,7 +5,7 @@
 ## Seja bem vindo ao meu projeto final da Academia ABAP, desafio realizado pela empresa referência no mercado, NTT DATA!
 
 
-<p>Supondo que você já leu a descrição do repositório, na linha 13 é onde se encontram as instruções para que possa rodas o APP!</p>
+<p>Supondo que você já leu a descrição do repositório, na linha 13 é onde se encontram as instruções para que possa rodar o APP!</p>
 <br>
 <p>Mas caso não tenha lido, aqui vai um breve resumo, esse projeto tinha como objetivo mostrar meus conhecimentos na linguagem durante a academia que durou do dia 31-10-2022 a 14-12-2022, como desafio final eu tinha o objetivo de realizar um sistema de cadastro responsivo que através de uma tela rodasse outros 3 sistemas, um que registra uma pessoa com informações como nome, sobrenome, RG e data do registro, a segunda tela era a tela de pesquisa, onde era possivel encontrar um indivíduo especifico por uma chave, que no caso era seu RG ou o dia que o mesmo foi registrado e por fim uma tela que apareciam os registros e que pudesse excluir o cadastro de um cliente.</p>
 
